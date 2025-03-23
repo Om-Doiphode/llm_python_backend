@@ -1,3 +1,4 @@
 Flask
 langchain-groq
 gunicorn
+flask-cors
