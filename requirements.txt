@@ -3,4 +3,4 @@ langchain-groq
 gunicorn
 flask-cors
 python-dotenv
-langchain-core
+langchain
