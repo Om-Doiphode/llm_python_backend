@@ -13,7 +13,7 @@ CORS(app)
 load_dotenv()
 
 groq_api_key = os.getenv('GROQ_API_KEY')
-memory = ConversationBufferMemory()
+memory_store={}
 
 @app.route("/models", methods=['GET'])
 def get_models():
@@ -38,6 +38,11 @@ def run():
     data = request.get_json()
     query = data.get("query","")
     model = data.get("model","")
+    
+    if model not in memory_store:
+        memory_store[model] = ConversationBufferMemory()
+        
+    memory = memory_store[model]
     
     # Make API request
     llm = ChatGroq(groq_api_key=groq_api_key, model_name=model)
